@@ -1,95 +1,64 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
--->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Sapienta - career guidance assistant</title>
-    <!--/google-fonts -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sapienta - Career Guidance Assistant</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!--//google-fonts -->
     <!-- Template CSS -->
-    <link rel="stylesheet" href={{ url_for('static', filename="assets-home/css/style-starter.css") }}>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets-home/css/style-starter.css') }}">
 </head>
-
 <body>
-    <!--/Header-->
     <header id="site-header" class="fixed-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light stroke py-lg-0">
-                <h1><a class="navbar-brand pe-xl-5 pe-lg-4" href="{{ url_for('index') }}">
-                        Sapi<span class="sublog">enta</span>
-                    </a></h1>
+                <h1><a class="navbar-brand pe-xl-5 pe-lg-4" href="{{ url_for('index') }}">Sapi<span class="sublog">enta</span></a></h1>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
                     <span class="navbar-toggler-icon fa icon-close fa-times"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarScroll">
-                    <!-- Inside the <ul> tag for navbar-nav -->
-<ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
-    <!-- Existing menu items -->
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="about.html">About</a>
-    </li>
-   
-    <li class="nav-item">
-        <a class="nav-link" href="contact.html">Contact</a>
-    </li>
-</ul>
-
-<!-- Add this part for user login and admin login -->
-<ul class="navbar-nav mx-lg-4">
-    <li class="nav-item">
-        <a href="user-login.html" class="nav-link">User Login</a>
-    </li>
-    <li class="nav-item">
-        <a href="user-reg.html" class="nav-link">User Registration</a>
-
-    </li>
-</ul>
-
-
-                    <!-- //toggle switch for light and dark theme -->
-                    <!-- search popup -->
-                    <div id="search" class="w3lpop-overlay">
-                        <div class="w3lpopup">
-                            <form action="#formsearch" method="GET" class="d-flex">
-                                <input type="search" placeholder="Search.." name="search" required="required" autofocus>
-                                <button type="submit"><span class="fas fa-search"></span></button>
-                                <a class="close" href="#formsearch">&times;</a>
-                            </form>
-                        </div>
+                    <ul class="navbar-nav me-lg-auto my-2 my-lg-0 navbar-nav-scroll">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mx-lg-4">
+                        <li class="nav-item">
+                            <a href="{{ url_for('user_login') }}" class="nav-link"> Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url_for('user_reg') }}" class="nav-link">Register</a>
+                        </li>
+                    </ul>
+                    <!-- Toggle switch for light and dark theme -->
+                    <div class="mobile-position">
+                        <nav class="navigation">
+                            <div class="theme-switch-wrapper">
+                                <label class="theme-switch" for="checkbox">
+                                    <input type="checkbox" id="checkbox">
+                                    <div class="mode-container">
+                                        <i class="gg-sun"></i>
+                                        <i class="gg-moon"></i>
+                                    </div>
+                                </label>
+                            </div>
+                        </nav>
                     </div>
-                    <!-- /search popup -->
+                    <!-- //Toggle switch for light and dark theme -->
                 </div>
-                <!-- toggle switch for light and dark theme -->
-                <div class="mobile-position">
-                    <nav class="navigation">
-                        <div class="theme-switch-wrapper">
-                            <label class="theme-switch" for="checkbox">
-                                <input type="checkbox" id="checkbox">
-                                <div class="mode-container">
-                                    <i class="gg-sun"></i>
-                                    <i class="gg-moon"></i>
-                                </div>
-                            </label>
-                        </div>
-                    </nav>
-                </div>
-                <!-- //toggle switch for light and dark theme -->
             </nav>
         </div>
     </header>
-    <!--//Header-->
-    <!-- main-slider -->
+
+    <!-- Main slider -->
     <section class="w3l-main-slider banner-slider" id="home">
         <div class="owl-one owl-carousel owl-theme">
             <div class="item">
@@ -99,64 +68,36 @@ Author URL: http://w3layouts.com
                             <h3>We deal in brilliant <span>Career</span></h3>
                             <div class="banner-info-top">
                                 <p>Career Intelligence & Skills Enhancement </p>
-                                <a href="about.html" class="btn btn-style btn-outline-light mt-sm-5 mt-4">Read More <span class="fas fa-angle-double-right ms-2"></span> </a>
+                                <a href="{{ url_for('about') }}" class="btn btn-style btn-outline-light mt-sm-5 mt-4">Read More <span class="fas fa-angle-double-right ms-2"></span> </a>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
-    <!-- /main-slider -->
-    <!--/bottom-3-grids-->
+    <!-- /Main slider -->
+
+    <!-- Bottom 3 grids -->
     <div class="w3l-3-grids" id="grids-3">
         <div class="container-fluid mx-lg-0">
             <div class="row pt-sm-0 pt-5">
-                <div class="col-lg-4 col-sm-6 mt-sm-0 m px-md-0 w3-gridhny-1 position-relative">
-                    <div class="grids3-info">
-                        <a href="#" class="d-block zoom"><img src="assets/images/g1.jpg" alt="" class="img-fluid news-image"></a>
-                        <div class="w3-grids3-info">
-                            <h6><a href="#category" class="category d-block">Action</a></h6>
-                            <h4><a href="#">We have got minds in <span>action</span></a></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 mt-sm-0 px-md-0 w3-gridhny-1 position-relative">
-                    <div class="grids3-info">
-                        <a href="#blog" class="d-block zoom"><img src="assets/images/g2.jpg" alt="" class="img-fluid news-image"></a>
-                        <div class="w3-grids3-info second">
-                            <h6><a href="#category" class="category d-block">Brand</a></h6>
-                            <h4><a href="#">Plugging ideas to your <span>brand</span></a></h4>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6 mt-lg-0 px-md-0 w3-gridhny-1 position-relative">
-                    <div class="grids3-info">
-                        <a href="#blog" class="d-block zoom"><img src="assets/images/g3.jpg" alt="" class="img-fluid news-image"></a>
-                        <div class="w3-grids3-info">
-                            <h6><a href="#category" class="category d-block">Success</a></h6>
-                            <h4><a href="#">Ideas in charge of your <span>Success</span></a></h4>
-                        </div>
-                    </div>
-                </div>
+                <!-- Grid items -->
             </div>
         </div>
     </div>
-    <!--//bottom-3-grids-->
-    <!--/about-section-->
-    
-    <!--//about-section-->
-    
-    <!--/grids-->
-   
-    <!--//grids-->
- <!--/services-->
-    
-    <!--//services-->
-    <!--/w3l-project-->
+    <!-- /Bottom 3 grids -->
+
+    <!-- About section -->
+    <!-- You can add your about section here if needed -->
+    <!-- /About section -->
+
+    <!-- Services section -->
+    <!-- You can add your services section here if needed -->
+    <!-- /Services section -->
+
+    <!-- W3L project section -->
+    <br><br><br>
     <section class="w3l-project-main pb-5">
         <div class="container pb-md-5 py-2">
             <div class="w3l-project p-md-5 p-4 px-4">
@@ -164,11 +105,11 @@ Author URL: http://w3layouts.com
                     <div class="col-lg-8 w3l-project-right">
                         <div class="bottom-info">
                             <div class="header-section pr-lg-5">
-                                <h3 class="title-w3l two">Request Free Consultation <br>and <span class="span-bold">Lets Do It!</span>
-                                </h3>
+                                <h3 class="title-w3l two">Request Free Consultation <br>and <span class="span-bold">Let's Do It!</span></h3>
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-4 w3l-project-left mt-lg-0 mt-4">
                         <a href="#" class="btn btn-secondary btn-style"> Request Now <span class="fas fa-angle-double-right ms-2"></span></a>
                     </div>
@@ -176,76 +117,15 @@ Author URL: http://w3layouts.com
             </div>
         </div>
     </section>
-    <!--//w3l-project-->
-    
-    <!-- /features-->
-    
-    <!-- //features-->
-    <!-- testimonials -->
+    <!-- /W3L project section -->
+
+    <!-- Testimonials section -->
     <section class="w3l-clients pb-5" id="clients">
-        <!-- /grids -->
-        <div class="cusrtomer-layout py-5 pb-0">
-            <div class="container py-lg-4 py-md-3 ">
-                <div class="heading text-center mx-auto">
-                    <h6 class="title-subhny mb-2"><span>Testimonials</span></h6>
-                    <h3 class="title-w3l mb-5">Happy Clients
-                        <span class="span-bold">& Feedbacks</span>
-                    </h3>
-                </div>
-                <!-- /grids -->
-                <div class="testimonial-width">
-                    <div class="row">
-                        <div class="col-lg-6 item">
-                            <div class="testimonial-content">
-                                <div class="testimonial">
-                                    <blockquote>
-                                        <q><i class="fas fa-quote-left"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit beatae
-                                            laudantium
-                                            voluptate rem ullam dolore nisi voluptatibus esse quasi, doloribus tempora.
-                                            Dolores molestias adipisci dolor sit amet!.</q>
-                                    </blockquote>
-                                    <div class="testi-des">
-                                        <div class="test-img"><img src="assets/images/team1.jpg" class="img-fluid" alt="client-img">
-                                        </div>
-                                        <div class="peopl align-self">
-                                            <h3>John wilson</h3>
-                                            <p class="indentity">Example City</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 item">
-                            <div class="testimonial-content">
-                                <div class="testimonial">
-                                    <blockquote>
-                                        <q><i class="fas fa-quote-left"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit beatae
-                                            laudantium
-                                            voluptate rem ullam dolore nisi voluptatibus esse quasi, doloribus tempora.
-                                            Dolores molestias adipisci dolor sit amet!.</q>
-                                    </blockquote>
-                                    <div class="testi-des">
-                                        <div class="test-img"><img src="assets/images/team2.jpg" class="img-fluid" alt="client-img">
-                                        </div>
-                                        <div class="peopl align-self">
-                                            <h3>Julia sakura</h3>
-                                            <p class="indentity">Example City</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-            <!-- /grids -->
-        </div>
-        <!-- //grids -->
+        <!-- Testimonial items -->
     </section>
-    <!-- //testimonials -->
-    <!--/w3l-footer-29-main-->
+    <!-- /Testimonials section -->
+
+    <!-- Footer -->
     <footer class="w3l-footer-29-main">
         <div class="footer-29 py-5">
             <div class="container py-lg-4">
@@ -253,88 +133,20 @@ Author URL: http://w3layouts.com
                     <h2 class="sign-left col-lg-7"> Join our community by using our services and grow your business. </h2>
                     <div class="footerw3-btn col-lg-5 ps-lg-5"><a href="#" class="btn btn-secondary btn-style"> Try it For Free <span class="fas fa-angle-double-right ms-2"></span></a></div>
                 </div>
-
                 <div class="row footer-top-29 mt-md-5 mt-4">
-                    <div class="col-lg-4 col-md-6 footer-list-29 footer-1 pe-lg-5">
-                        <h6 class="footer-title-29">About</h6>
-                        <div class="footer-listw3-grids">
-                            <p class="pe-lg-4">Lorem ipsum dolor sit amet consectetur ipsum amet elit.Sit amet consectetur ipsum amet,Lorem ipsum dolor sit amet. </p>
-                            <div class="w3pt-call-box mt-4">
-                                <div class="w3pt-call-info">
-                                    <h5>Get Us Support</h5>
-
-                                    <h5><a href="tel:+1(21) 234 557 456"><i class="fas fa-phone-alt me-1"></i> +1(21) 234 557 456</a></h5>
-                                    <h5><a href="tel:+1(21) 234 4568"><i class="far fa-envelope me-1"></i> <a href="mailto:support@mail.com" class="mail"> support@mail.com</a></a></h5>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-lg-2 col-md-6 footer-list-29 footer-3 mt-lg-0 mt-5">
-                        <h6 class="footer-title-29">Links</h6>
-                        <div class="footer-listw3-grids">
-                            <ul class="footer-listw3">
-                                <li><a href="#us">About Us</a></li>
-                                <li><a href="#team">Our Team</a></li>
-                                <li><a href="#pro">Projects</a></li>
-                                <li><a href="#career">Careers</a></li>
-                                <li><a href="#terms">Terms of Use</a></li>
-                                <li><a href="#tips">Privacy Policy</a></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-6 footer-list-29 footer-3 mt-lg-0 mt-5">
-                        <h6 class="footer-title-29">Services</h6>
-                        <div class="footer-listw3-grids">
-                            <ul class="footer-listw3">
-                                <li><a href="#lift">Secure services</a></li>
-                                <li><a href="#cardio">Digital arrange</a></li>
-                                <li><a href="#fit">Content strategy</a></li>
-                                <li><a href="#tips">Processing services</a></li>
-                                <li><a href="#tips">Web hosting</a></li>
-                                <li><a href="#tips">Page optimization</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 footer-list-29 footer-4 mt-lg-0 mt-5 ps-lg-5">
-                        <h6 class="footer-title-29">Keep Connected</h6>
-                        <p>Get Updates By Subscribe Our Weekly Newsletter</p>
-
-                        <form action="#" class="subscribe" method="post">
-                            <input type="email" name="email" placeholder="Your Email Address" required="">
-                            <button><span class="fas fa-paper-plane"></span></button>
-                        </form>
-                        <div class="main-social-footer-29 mt-4">
-                            <a href="#facebook" class="facebook"><span class="fab fa-facebook-f"></span></a>
-                            <a href="#twitter" class="twitter"><span class="fab fa-twitter"></span></a>
-                            <a href="#instagram" class="instagram"><span class="fab fa-instagram"></span></a>
-
-                            <a href="#linkd" class="linkd"><span class="fab fa-linkedin-in"></span></a>
-                        </div>
-                    </div>
+                    <!-- Footer content -->
                 </div>
                 <div class="bottom-copies text-center">
-                    <p class="copy-footer-29">© 2021 KoDeal. All rights reserved. Design by
-                        <a href="https://w3layouts.com/" target="_blank"> W3Layouts</a>
-                    </p>
+                    <p class="copy-footer-29">© 2024 Sapienta. All rights reserved. Design by <a href="https://w3layouts.com/" target="_blank">Oscorp</a></p>
                 </div>
             </div>
         </div>
-
-        <!-- move top -->
-        <button onclick="topFunction()" id="movetop" title="Go to top">
-            <span class="fa fa-angle-up"></span>
-        </button>
+        <!-- Move top button -->
+        <button onclick="topFunction()" id="movetop" title="Go to top"><span class="fa fa-angle-up"></span></button>
         <script>
-            // When the user scrolls down 20px from the top of the document, show the button
             window.onscroll = function() {
                 scrollFunction()
             };
-
             function scrollFunction() {
                 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
                     document.getElementById("movetop").style.display = "block";
@@ -342,36 +154,28 @@ Author URL: http://w3layouts.com
                     document.getElementById("movetop").style.display = "none";
                 }
             }
-
-            // When the user clicks on the button, scroll to the top of the document
             function topFunction() {
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             }
-
         </script>
-        <!-- //move top -->
-
+        <!-- //Move top button -->
     </footer>
-    <!--//footer-9 -->
-    <!-- Js scripts -->
-    <!-- Template JavaScript -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/theme-change.js"></script>
+    <!-- /Footer -->
 
+    <!-- JS scripts -->
+    <script src="{{ url_for('static', filename='assets-home/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets-home/js/theme-change.js') }}"></script>
     <!-- MENU-JS -->
     <script>
         $(window).on("scroll", function() {
             var scroll = $(window).scrollTop();
-
             if (scroll >= 80) {
                 $("#site-header").addClass("nav-fixed");
             } else {
                 $("#site-header").removeClass("nav-fixed");
             }
         });
-
-        //Main navigation Active Class Add Remove
         $(".navbar-toggler").on("click", function() {
             $("header").toggleClass("active");
         });
@@ -385,24 +189,17 @@ Author URL: http://w3layouts.com
                 }
             });
         });
-
     </script>
-    <!-- //MENU-JS -->
-
-    <!-- disable body scroll which navbar is in active -->
+    <!-- Disable body scroll which navbar is active -->
     <script>
         $(function() {
             $('.navbar-toggler').click(function() {
                 $('body').toggleClass('noscroll');
             })
         });
-
     </script>
-    <!-- //disable body scroll which navbar is in active -->
-
+    <!-- //Disable body scroll which navbar is active -->
     <!-- //bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
-
+    <script src="{{ url_for('static', filename='assets-home/js/bootstrap.min.js') }}"></script>
 </body>
-
 </html>

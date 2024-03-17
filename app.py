@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
+from flask_caching import Cache
 from mongodb_helper import MongoDBHelper
 import hashlib 
 
@@ -7,6 +8,9 @@ app = Flask(__name__)
 connection_string = "mongodb+srv://admin:kFCu0SxsdUEjxntU@cluster0.g17f64c.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 db_name = "sapienta"
 helper = MongoDBHelper(connection_string, db_name)
+
+app.config['SECRET_KEY'] = 'hari123'
+cache = Cache(app, config={'CACHE_TYPE': 'redis','CACHE_REDIS_URL': 'redis://localhost:6379/0'})
 
 @app.route("/")
 def index():
@@ -40,6 +44,7 @@ def user_login():
                 </script>
                 '''
         
+        session['user_id'] = data.get("username")
         return '''
                 <script>
                 alert('Welcome Back!');
@@ -67,7 +72,6 @@ def user_reg():
         
         password_hash = hashlib.sha256(data.get("password").encode()).hexdigest()
 
-        
         login_document = {
             "email": data.get("username"),
             "password": password_hash
@@ -110,11 +114,74 @@ def user_reg():
     else:
         return render_template("user-reg.html")
 
+#user
+
 @app.route("/user/")
 def user_index():
-    return render_template("user/index.html")
+    if 'user_id' in session.keys():
+        email = session['user_id']
+        collection_name_login = "login"
+        collection_name_register = "users"
+        pipeline = [
+            {"$match": {"email": email}},
+            {"$lookup": {
+                "from": collection_name_register,
+                "localField": "_id",
+                "foreignField": "user_id",
+                "as": "user_details"
+            }},
+            {"$unwind": "$user_details"},
+            {"$project": {"_id": 0, "name": "$user_details.name"}},
+            {"$limit": 1} 
+        ]
+
+        user_details_cursor = helper.aggregate(collection_name_login, pipeline)
+        user_details = next(user_details_cursor, None)
+        name = user_details.get("name")
+        return render_template("user/index.html", name=name)
+    else:
+        return render_template("index.html")
 
 
+@app.route("/user/profile", methods=["POST", "GET"])
+def profile():
+    if 'user_id' in session.keys():
+        email = session['user_id']
+        collection_name_login = "login"
+        collection_name_register = "users"
+        
+        if request.method == "POST":
+            new_phone = request.form.get("phone")
+            user_login = helper.find_document(collection_name_login, {"email": email})
+            if user_login:
+                user_id = user_login.get("_id")
+                result = helper.update_document(collection_name_register, {"user_id": user_id}, {"$set": {"phonenumber": new_phone}})
+                
+                
+        pipeline = [
+            {"$match": {"email": email}},
+            {"$lookup": {
+                "from": collection_name_register,
+                "localField": "_id",
+                "foreignField": "user_id",
+                "as": "user_details"
+            }},
+            {"$unwind": "$user_details"},
+            {"$project": {"_id": 0, "name": "$user_details.name", "phonenumber": "$user_details.phonenumber"}},
+            {"$limit": 1} 
+        ]
+
+        user_details_cursor = helper.aggregate(collection_name_login, pipeline)
+        user_details = next(user_details_cursor, None)
+        name = user_details.get("name")
+        phone = user_details.get("phonenumber")
+        return render_template("user/profile.html", name=name, email=email, phone=phone)
+    else:
+        return render_template("index.html")
+
+@app.route("/user/predict")
+def predict():
+    return render_template("user/predict.html")
 
 
 @app.errorhandler(404)

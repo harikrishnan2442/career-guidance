@@ -140,6 +140,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                                 </a>
                             </li>
+                            <li class="treeview">
+                                <a href={{ url_for("profile") }}>
+                                    <i class="fa fa-dashboard"></i> <span>Profile</span>
+                                </a>
+                            </li>
+                            <li class="treeview">
+                                <a href={{ url_for("predict") }}>
+                                    <i class="fa fa-dashboard"></i> <span>Predict</span>
+                                </a>
+                            </li>
 
                             <li class="treeview">
                                 <a href="#">
@@ -183,8 +193,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                     <span class="prfil-img"><img src={{ url_for('static',
                                             filename="assets-user/images/2.jpg" )}} alt=""> </span>
                                     <div class="user-name">
-                                        <p>Admin Name</p>
-                                        <span>Administrator</span>
+                                        <p>{{ name }}</p>
+                                        <span>User</span>
                                     </div>
                                     <i class="fa fa-angle-down lnr"></i>
                                     <i class="fa fa-angle-up lnr"></i>
@@ -192,7 +202,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </div>
                             </a>
                             <ul class="dropdown-menu drp-mnu">
-                                <li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li>
+                                <li> <a href="{{ url_for('profile') }}"><i class="fa fa-suitcase"></i> Profile</a> </li>
                                 <li> <a href="#"><i class="fa fa-cog"></i> Change Password</a> </li>
                                 <li> <a href={{ url_for("user_index") }}><i class="fa fa-sign-out"></i> Logout</a> </li>
                             </ul>

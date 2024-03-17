@@ -1,0 +1,38 @@
+{% include "user/header.html" %}
+
+<!-- main content start-->
+<div id="page-wrapper" style="min-height: 292px;">
+    <div class="main-page">
+        <h2 class="title1">Profile</h2>
+        <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+            <div class="form-title">
+                <h4>Edit details</h4>
+            </div>
+            <div class="form-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" name="email" placeholder="Enter you Email"
+                            value="{{ email }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Full name</label>
+                        <input type="name" class="form-control" name="fname" placeholder="Enter you name"
+                            value="{{ name }}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Phone Number</label>
+                        <input type="number" class="form-control" name="phone" placeholder="Enter you phone number"
+                            value="{{ phone }}" required>
+                    </div>
+                    <br>
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% include "user/footer.html" %}

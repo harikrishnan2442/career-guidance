@@ -23,3 +23,7 @@ class MongoDBHelper:
         collection = self.db[collection_name]
         result = collection.delete_one(query)
         return result.deleted_count
+    
+    def aggregate(self, collection_name, pipeline):
+        collection = self.db[collection_name]
+        return collection.aggregate(pipeline)

@@ -2,3 +2,5 @@ flask
 pymongo
 flask_caching
 redis
+google.generativeai
+scikit-learn==1.2.2

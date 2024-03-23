@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_caching import Cache
 from mongodb_helper import MongoDBHelper
 import hashlib 
+import google.generativeai as genai
+import re
+import pickle
 
 app = Flask(__name__)
 
@@ -11,6 +14,25 @@ helper = MongoDBHelper(connection_string, db_name)
 
 app.config['SECRET_KEY'] = 'hari123'
 cache = Cache(app, config={'CACHE_TYPE': 'redis','CACHE_REDIS_URL': 'redis://localhost:6379/0'})
+
+api_key = "AIzaSyDXWRRh5XQy9O0_PloCn2Y8PYdvTs_XW7A"
+model_name = "gemini-pro"
+genai.configure(api_key=api_key)
+model = genai.GenerativeModel(model_name)
+model2 = pickle.load(open('model/xgboost.sav', 'rb'))
+
+start = -1
+
+Name = None
+Location = None
+Mark = None
+Subject = None
+Interest = None
+Hobbies = None
+Goal = None
+Salary = None
+job_study = None
+Ambition = None
 
 @app.route("/")
 def index():
@@ -183,6 +205,132 @@ def profile():
 def predict():
     return render_template("user/predict.html")
 
+@app.route("/user/predict_IT", methods = ["POST", "GET"])
+def predict_IT():
+    if 'user_id' in session.keys():
+        if request.method == "POST":
+            data = request.form
+            print(data)
+            form_data_list = [[int(value) for key, value in data.items()]]
+
+            print(form_data_list)
+            res = model2.predict(form_data_list)
+            return render_template("user/result.html",pred="it", response=res[0] )
+        else:
+            return render_template("user/predict_IT.html")
+    else:
+        return render_template("index.html")
+
+    return render_template("user/predict_IT.html")
+
+@app.route("/user/predict_NONIT", methods = ["POST", "GET"])
+def predict_NONIT():
+    if 'user_id' in session.keys():
+        if request.method == "POST":
+            data = request.form
+            
+            Foreign = data.get("language")
+            Art = data.get("art")
+            English = data.get("english_percent")
+            Financial = data.get("financial")
+            Legal = data.get("legal")
+            Client = data.get("client_roles")
+            Team = data.get("independent")
+            Dead = data.get("deadline")
+            
+            prompt = f"""
+            Let's explore your skills, interests, and work preferences to find the perfect career fit for you.
+
+            Do I have proficiency in foreign languages...yes in {Foreign} languages
+            Do I have proficiency in creative skills such as design, art, or music...yes I have in {Art}
+            My percentage in English language is {English}
+            I have level {Financial} of understanding of financial concepts and accounting principles
+            Am I familiar with legal regulations and compliance in relevant industries? {Legal }
+            {Client} have communication and interpersonal skills for client-facing roles? 
+            I am comfortable working {Team}
+            I can handle working with {Dead}
+            """
+            
+            chat = model.start_chat()
+            response = chat.send_message(prompt)
+            txt = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', response.text)
+            txt = txt.replace("* ", "<br>")
+
+            return render_template("user/result.html",pred="non", response=txt )
+        else:
+            return render_template("user/predict_NONIT.html")
+    else:
+        return render_template("index.html")
+
+@app.route("/user/chatbot")
+def chatbot():
+    return render_template("user/chatbot.html")
+
+@app.route("/chat",methods=["POST","GET"])
+def chat():
+    global start, Name, Location, Mark, Subject, Interest, Hobbies, Goal, Salary, job_study, Ambition
+    if request.method == "POST":
+        input = request.form['input']
+        if input.lower()=="hi" and start==-1:
+            start+=2
+            return "Welcome to the Career Assistant Bot!\nwhat is your name?"
+        elif start==1:
+            start+=1
+            Name = input
+            return "In which city are you located?"
+        elif start==2:
+            start+=1
+            Location = input
+            return "What was your percentage in 12th standard?"
+        elif start==3:
+            start+=1
+            Mark = input
+            return "What subjects did you excel in during 12th standard?"
+        elif start==4:
+            start+=1
+            Subject = input
+            return "What topics or activities do you find interesting?"
+        elif start==5:
+            start+=1
+            Interest = input
+            return "What do you like to do in your free time?"
+        elif start==6:
+            start+=1
+            Hobbies = input
+            return "What do you want to achieve in your career?"
+        elif start==7:
+            start+=1
+            Goal = input
+            return "Do you want a job that pays well? (y/n)"
+        elif start==8:
+            start+=1
+            Salary = input
+            return "Do you plan to pursue higher studies or enter the job market?"
+        elif start==9:
+            start+=1
+            job_study = input
+            return "What do you think you'd like to work in the future (Ambition)?"
+        elif start==10:
+            start+=1
+            Ambition = input
+            
+            career_start = f"""
+                Let's explore your academic achievements, interests, and career aspirations to find the perfect higher studies course and college for you. Your Name is {Name}
+
+                You are located in {Location} and achieved {Mark}% in your 12th standard exams. It's great to know that you excelled in {Subject} compared to other subjects.
+
+                You are interested in {Interest} and enjoy {Hobbies} in your free time. Your career goal is to {Goal}, with a preference for a high-paying job. Currently, you are considering {job_study} and aspire to work as a {Ambition} in the future. A good salary is important to you, and you're willing to relocate if necessary.
+
+                Considering your academic performance and interests, as well as your career aspirations, let's explore suitable higher studies courses that align with your profile and recommend reputable colleges in your {Location}.
+                """
+            chat = model.start_chat()
+            response = chat.send_message(career_start)
+            
+            txt = response.text.replace(" * ", "<br>")
+            txt = re.sub(r'\*\*(.*?)\*\*', r'<b>\1</b>', txt)
+            return txt
+    else:
+        return "error"
 
 @app.errorhandler(404)
 def not_found(error):

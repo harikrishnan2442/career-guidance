@@ -1,0 +1,65 @@
+{% include "user/header.html" %}
+
+<!-- main content start-->
+<div id="page-wrapper" style="min-height: 292px;">
+    <div class="main-page">
+        <h2 class="title1">Predict</h2>
+        <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+            <div class="form-title">
+                <h4>Enter details</h4>
+            </div>
+            <div class="form-body">
+                <form method="post" action="{{ url_for('predict_NONIT') }}">
+                    <div class="row">
+                        <div class="form-group col-md-6"> <label for="exampleInputEmail1">proficiency in foreign
+                                languages?, specify if you have any:</label>
+                            <input type="text" class="form-control" name="language" placeholder="Enter the language"
+                                min="0" max="100">
+                        </div>
+                        <div class="form-group col-md-6"> <label for="exampleInputEmail1"> proficiency in creative
+                                skills such as design, art, or music?, specify if you have any:</label>
+                            <input type="text" class="form-control" name="art" placeholder="Enter if any" min="0"
+                                max="100">
+                        </div>
+                        <div class="form-group col-md-6"> <label for="exampleInputEmail1">percentage in English
+                                language?</label>
+                            <input type="number" class="form-control" name="english_percent"
+                                placeholder="Enter the percentage" min="0" max="100">
+                        </div>
+                        <div class="form-group col-md-6"> <label for="exampleInputEmail1">level of understanding of
+                                financial concepts and accounting principles?</label>
+                            <input type="number" class="form-control" name="financial" placeholder="Enter the level"
+                                min="0" max="10">
+                        </div>
+                        <div class="form-group col-md-6"> <label for="exampleInputPassword1">Are you familiar with legal
+                                regulations and compliance in relevant industries?</label>
+                            <select class="form-control" name="legal" placeholder="(Y/S))">
+                                <option value="1">YES</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6"> <label for="exampleInputPassword1">Do you have communication
+                                and interpersonal skills for client-facing roles?</label>
+                            <select class="form-control" name="client_roles" placeholder="(Y/S)">
+                                <option value="1">YES</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6"> <label for="exampleInputEmail1">Are you comfortable working
+                                independently, or do you prefer a collaborative environment?</label>
+                            <input type="text" class="form-control" name="independent"
+                                placeholder="Independent or group" min="0" max="100">
+                        </div>
+                        <div class="form-group col-md-6"> <label for="exampleInputEmail1">Can you handle working with
+                                strict deadlines, or is a more flexible schedule important to you?</label>
+                            <input type="text" class="form-control" name="deadline" placeholder="Deadline or schedule"
+                                min="0" max="100">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

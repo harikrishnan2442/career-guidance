@@ -1,0 +1,118 @@
+{% include "user/header.html" %}
+
+<!-- main content start-->
+<div id="page-wrapper" style="min-height: 292px;">
+    <div class="main-page">
+        <div class="span_8" style="margin: auto;width: 50%;">
+            <div class="activity_box activity_box1">
+                <h3>Chat</h3>
+                <div class="scrollbar" id="style-3">
+
+                </div>
+                <input type="text" placeholder='Enter your text' id="messageText">
+                <input type="submit" value="Send" id="sendBtn" />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "user/footer.html" %}
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Event listener for sending message
+        $("#sendBtn").click(function () {
+            sendMessage();
+        });
+
+        // Event listener for pressing Enter key
+        $("#messageText").keypress(function (e) {
+            if (e.which == 13) {
+                sendMessage();
+            }
+        });
+
+
+        // Function to send message
+        function sendMessage() {
+            var message = $("#messageText").val();
+            if (message.trim() !== "") {
+                // Append user message to chat body
+                $("#style-3").append('<div class="activity-row activity-row1"> \
+                    <div class="col-xs-2 activity-desc1"></div> \
+                    <div class="col-xs-7 activity-img2"> \
+                        <div class="activity-desc-sub1"> \
+                            <h5>User</h5> \
+                            <p>'+ message + '</p> \
+                        </div> \
+                    </div> \
+                    <div class="col-xs-3 activity-img"> \
+                        <img src="{{ url_for("static", filename="assets-user/images/3.jpg") }}" class="img-responsive"alt="" /> \
+                        </div> \
+                    <div class="clearfix"> </div> \
+                </div>');
+
+                // Clear input field
+                $("#messageText").val("");
+                // Scroll to bottom of chat body
+                $("#style-3").scrollTop($("#style-3")[0].scrollHeight);
+
+                // Send message to server (not implemented in this example)
+                $.ajax({
+                    type: "POST",
+                    url: "/chat",
+                    data: { input: message },
+                    success: function (response) {
+                        // Remove asterisks (*) from the response
+                        var cleanResponse = response.replace(/\*/g, '');
+
+                        // Append bot message to chat body
+                        $("#style-3").append('<div class="activity-row activity-row1"> \
+                            <div class="col-xs-3 activity-img"> \
+                                <img src="{{ url_for("static", filename="assets-user/images/1.jpg") }}" class="img-responsive" alt="" /> \
+                                </div> \
+                            <div class="col-xs-5 activity-img1"> \
+                                <div class="activity-desc-sub"> \
+                                    <h5>SAPI</h5> \
+                                    <p>'+ cleanResponse + '</p> \
+                                </div> \
+                            </div> \
+                            <div class="col-xs-4 activity-desc1"></div> \
+                            <div class="clearfix"> </div> \
+                        </div>');
+                        // Clear input field
+                        $("#messageText").val("");
+                        // Scroll to bottom of chat body
+                        $("#style-3").scrollTop($("#style-3")[0].scrollHeight);
+
+                        if ('speechSynthesis' in window) {
+                            // Create a new SpeechSynthesisUtterance object
+                            var utterance = new SpeechSynthesisUtterance();
+
+                            // Set text to be spoken
+                            utterance.text = cleanResponse;
+
+                            // Optionally, set voice, rate, pitch, etc.
+                               utterance.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name == 'Microsoft David Desktop - English (United States)'; })[0];
+                               utterance.rate = 1;
+                               utterance.pitch =18; // Increase pitch for a robotic effect
+
+
+                            // Speak the text
+                            speechSynthesis.speak(utterance);
+                        } else {
+                            // Speech synthesis not supported
+                            console.log("Speech synthesis not supported.");
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+        }
+    });
+</script>

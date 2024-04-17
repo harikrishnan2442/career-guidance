@@ -136,44 +136,21 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         <ul class="sidebar-menu">
                             <li class="header"></li>
                             <li class="treeview">
-                                <a href={{ url_for("user_index") }}>
+                                <a href={{ url_for("admin_index") }}>
                                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                                 </a>
                             </li>
                             <li class="treeview">
-                                <a href={{ url_for("profile") }}>
-                                    <i class="fa fa-dashboard"></i> <span>Profile</span>
+                                <a href={{ url_for("admin_users") }}>
+                                    <i class="fa fa-dashboard"></i> <span>Users</span>
                                 </a>
                             </li>
                             <li class="treeview">
-                                <a href={{ url_for("predict") }}>
-                                    <i class="fa fa-dashboard"></i> <span>Predict</span>
-                                </a>
-                            </li>
-                            <li class="treeview">
-                                <a href={{ url_for("chatbot") }}>
-                                    <i class="fa fa-dashboard"></i> <span>ChatBot</span>
-                                </a>
-                            </li>
-                            <li class="treeview">
-                                <a href={{ url_for("history") }}>
+                                <a href={{ url_for("admin_history") }}>
                                     <i class="fa fa-dashboard"></i> <span>Predict History</span>
                                 </a>
                             </li>
 
-                            <!-- <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-folder"></i> <span>Examples</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-angle-right"></i> Login</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i> Register</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i> 404 Error</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i> 500 Error</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i> Blank Page</a></li>
-                                </ul>
-                            </li> -->
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -205,7 +182,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                             style="width: 40px;height: 40px;"> </span>
                                     <div class="user-name">
                                         <p>{{ name }}</p>
-                                        <span>User</span>
+                                        <span>admin</span>
                                     </div>
                                     <i class="fa fa-angle-down lnr"></i>
                                     <i class="fa fa-angle-up lnr"></i>
@@ -215,7 +192,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <ul class="dropdown-menu drp-mnu">
                                 <li> <a href="{{ url_for('profile') }}"><i class="fa fa-suitcase"></i> Profile</a> </li>
                                 <li> <a href="#"><i class="fa fa-cog"></i> Change Password</a> </li>
-                                <li> <a href={{ url_for("logout") }}><i class="fa fa-sign-out"></i> Logout</a> </li>
+                                <li> <a href={{ url_for("index") }}><i class="fa fa-sign-out"></i> Logout</a> </li>
                             </ul>
                         </li>
                     </ul>

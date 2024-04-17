@@ -1,0 +1,277 @@
+{% include "user/header.html" %}
+
+<!-- main content start-->
+<div id="page-wrapper" style="min-height: 292px;">
+    <div class="main-page">
+        <div class="tables">
+            <h2 class="title1">Predict History</h2>
+            <div class="bs-example widget-shadow" data-example-id="hoverable-table">
+                <h4></h4>
+                <div style="overflow-x: scroll;">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>label</th>
+                                <th>os_percentage</th>
+                                <th>algorithms_percentage</th>
+                                <th>program_concept</th>
+                                <th>software_engineering</th>
+                                <th>cn_percentage</th>
+                                <th>electronics_percentage</th>
+                                <th>computerarch_percentage</th>
+                                <th>maths_percentage</th>
+                                <th>computer_skills</th>
+                                <th>logical_rating</th>
+                                <th>hackathons</th>
+                                <th>coding_rating</th>
+                                <th>public_speaking</th>
+                                <th>timebeforesystem</th>
+                                <th>selflearning</th>
+                                <th>certificate</th>
+                                <th>workshop</th>
+                                <th>talenttests</th>
+                                <th>memory_capability</th>
+                                <th>interested_subject</th>
+                                <th>type_of_company</th>
+                                <th>m_or_t</th>
+                                <th>h_or_s</th>
+                                <th>in_teams</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in res %}
+                            <tr>
+                                <th scope="row">{{ loop.index0 + 1 }}</th>
+                                <td>
+                                    {% if row.label == 0 %}
+                                    Applications Developer
+                                    {% elif row.label == 1 %}
+                                    Business Intelligence Analyst
+                                    {% elif row.label == 2 %}
+                                    Business Systems Analyst
+                                    {% elif row.label == 3 %}
+                                    CRM Business Analyst
+                                    {% elif row.label == 4 %}
+                                    CRM Technical Developer
+                                    {% elif row.label == 5 %}
+                                    Data Architect
+                                    {% elif row.label == 6 %}
+                                    Database Administrator (DBA)
+                                    {% elif row.label == 7 %}
+                                    Database Developer
+                                    {% elif row.label == 8 %}
+                                    Database Manager
+                                    {% elif row.label == 9 %}
+                                    Design & UX
+                                    {% elif row.label == 10 %}
+                                    E-Commerce Analyst
+                                    {% elif row.label == 11 %}
+                                    Information Security Analyst
+                                    {% elif row.label == 12 %}
+                                    Information Technology Auditor
+                                    {% elif row.label == 13 %}
+                                    Information Technology Manager
+                                    {% elif row.label == 14 %}
+                                    Mobile Applications Developer
+                                    {% elif row.label == 15 %}
+                                    Network Engineer
+                                    {% elif row.label == 16 %}
+                                    Network Security Administrator
+                                    {% elif row.label == 17 %}
+                                    Network Security Engineer
+                                    {% elif row.label == 18 %}
+                                    Portal Administrator
+                                    {% elif row.label == 19 %}
+                                    Programmer Analyst
+                                    {% elif row.label == 20 %}
+                                    Project Manager
+                                    {% elif row.label == 21 %}
+                                    Quality Assurance Associate
+                                    {% elif row.label == 22 %}
+                                    Software Developer
+                                    {% elif row.label == 23 %}
+                                    Software Engineer
+                                    {% elif row.label == 24 %}
+                                    Software Quality Assurance (QA) / Testing
+                                    {% elif row.label == 25 %}
+                                    Software Systems Engineer
+                                    {% elif row.label == 26 %}
+                                    Solutions Architect
+                                    {% elif row.label == 27 %}
+                                    Systems Analyst
+                                    {% elif row.label == 28 %}
+                                    Systems Security Administrator
+                                    {% elif row.label == 29 %}
+                                    Technical Engineer
+                                    {% elif row.label == 30 %}
+                                    Technical Services/Help Desk/Tech Support
+                                    {% elif row.label == 31 %}
+                                    Technical Support
+                                    {% elif row.label == 32 %}
+                                    UX Designer
+                                    {% elif row.label == 33 %}
+                                    Web Developer
+                                    {% endif %}
+                                </td>
+                                <td>{{ row.os_percentage }}</td>
+                                <td>{{ row.algorithms_percentage }}</td>
+                                <td>{{ row.program_concept }}</td>
+                                <td>{{ row.software_engineering }}</td>
+                                <td>{{ row.cn_percentage }}</td>
+                                <td>{{ row.electronics_percentage }}</td>
+                                <td>{{ row.computerarch_percentage }}</td>
+                                <td>{{ row.maths_percentage }}</td>
+                                <td>{{ row.computer_skills }}</td>
+                                <td>{{ row.logical_rating }}</td>
+                                <td>{{ row.hackathons }}</td>
+                                <td>{{ row.coding_rating }}</td>
+                                <td>{{ row.public_speaking }}</td>
+                                <td>
+                                    {% if row.timebeforesystem == 0 %}
+                                    No
+                                    {% elif row.timebeforesystem == 1 %}
+                                    Yes
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if row.selflearning == 0 %}
+                                    No
+                                    {% elif row.selflearning == 1 %}
+                                    Yes
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if row.certificate == 0 %}
+                                    app development
+                                    {% elif row.certificate == 1 %}
+                                    distro making
+                                    {% elif row.certificate == 2 %}
+                                    full stack
+                                    {% elif row.certificate == 3 %}
+                                    hadoop
+                                    {% elif row.certificate == 4 %}
+                                    information security
+                                    {% elif row.certificate == 5 %}
+                                    machine learning
+                                    {% elif row.certificate == 6 %}
+                                    python
+                                    {% elif row.certificate == 7 %}
+                                    r programming
+                                    {% elif row.certificate == 8 %}
+                                    shell programming
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if row.workshop == 0 %}
+                                    cloud computing
+                                    {% elif row.workshop == 1 %}
+                                    data science
+                                    {% elif row.workshop == 2 %}
+                                    database security
+                                    {% elif row.workshop == 3 %}
+                                    game development
+                                    {% elif row.workshop == 4 %}
+                                    hacking
+                                    {% elif row.workshop == 5 %}
+                                    system designing
+                                    {% elif row.workshop == 6 %}
+                                    testing
+                                    {% elif row.workshop == 7 %}
+                                    web technologies
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if row.talenttests == 0 %}
+                                    No
+                                    {% elif row.talenttests == 1 %}
+                                    Yes
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if row.memory_capability == 0 %}
+                                    excellent
+                                    {% elif row.memory_capability == 1 %}
+                                    medium
+                                    {% elif row.memory_capability == 2 %}
+                                    poor
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if row.interested_subject == 0 %}
+                                    Computer Architecture
+                                    {% elif row.interested_subject == 1 %}
+                                    IOT
+                                    {% elif row.interested_subject == 2 %}
+                                    Management
+                                    {% elif row.interested_subject == 3 %}
+                                    Software Engineering
+                                    {% elif row.interested_subject == 4 %}
+                                    cloud computing
+                                    {% elif row.interested_subject == 5 %}
+                                    data engineering
+                                    {% elif row.interested_subject == 6 %}
+                                    hacking
+                                    {% elif row.interested_subject == 7 %}
+                                    networks
+                                    {% elif row.interested_subject == 8 %}
+                                    parallel computing
+                                    {% elif row.interested_subject == 9 %}
+                                    programming
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if row.type_of_company == 0 %}
+                                    BPA
+                                    {% elif row.type_of_company == 1 %}
+                                    Cloud Services
+                                    {% elif row.type_of_company == 2 %}
+                                    Finance
+                                    {% elif row.type_of_company == 3 %}
+                                    Product based
+                                    {% elif row.type_of_company == 4 %}
+                                    SAaS services
+                                    {% elif row.type_of_company == 5 %}
+                                    Sales and Marketing
+                                    {% elif row.type_of_company == 6 %}
+                                    Service Based
+                                    {% elif row.type_of_company == 7 %}
+                                    Testing and Maintainance Services
+                                    {% elif row.type_of_company == 8 %}
+                                    Web Services
+                                    {% elif row.type_of_company == 9 %}
+                                    product development
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if row.m_or_t == 0 %}
+                                    Management
+                                    {% elif row.m_or_t == 1 %}
+                                    Technical
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if row.h_or_s == 0 %}
+                                    Hard worker
+                                    {% elif row.h_or_s == 1 %}
+                                    smart worker
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if row.in_teams == 0 %}
+                                    YES
+                                    {% elif row.in_teams == 1 %}
+                                    No
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "user/footer.html" %}

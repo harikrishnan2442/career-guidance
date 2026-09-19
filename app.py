@@ -56,6 +56,8 @@ def send_message():
     return render_template("contact.html")
 
 
+
+
 @app.route('/user/logout')
 def logout():
     if 'user_id' in session.keys():

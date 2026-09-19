@@ -55,6 +55,26 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             width: 100%;
             height: 295px;
         }
+        .profile_details_drop .dropdown-menu li a {
+    padding: 10px 15px;
+    font-size: 14px;
+    transition: background 0.3s;
+    color: #333;
+}
+.profile_details_drop .dropdown-menu li a:hover {
+    background-color: #f4f4f4;
+}
+.sidebar-menu li a {
+    padding: 10px 20px;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+.sidebar-menu li a:hover {
+    background-color: #1f2c38;
+}
+
     </style>
     <!--pie-chart --><!-- index page sales reviews visitors pie chart -->
     <script src={{ url_for('static' ,filename="assets-user/js/pie-chart.js" ) }} type="text/javascript"></script>
@@ -116,112 +136,70 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 <body class="cbp-spmenu-push">
     <div class="main-content">
-        <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-            <!--left-fixed -navigation-->
-            <aside class="sidebar-left">
-                <nav class="navbar navbar-inverse">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target=".collapse" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <h1><a class="navbar-brand" href={{ url_for("user_index") }}><span
-                                    class="fa fa-area-chart"></span>Sapienta<span class="dashboard_text">User
-                                    dashboard</span></a></h1>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="sidebar-menu">
-                            <li class="header"></li>
-                            <li class="treeview">
-                                <a href={{ url_for("user_index") }}>
-                                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                                </a>
-                            </li>
-                            <li class="treeview">
-                                <a href={{ url_for("profile") }}>
-                                    <i class="fa fa-dashboard"></i> <span>Profile</span>
-                                </a>
-                            </li>
-                            <li class="treeview">
-                                <a href={{ url_for("predict") }}>
-                                    <i class="fa fa-dashboard"></i> <span>Predict</span>
-                                </a>
-                            </li>
-                            <li class="treeview">
-                                <a href={{ url_for("chatbot") }}>
-                                    <i class="fa fa-dashboard"></i> <span>ChatBot</span>
-                                </a>
-                            </li>
-                            <li class="treeview">
-                                <a href={{ url_for("history") }}>
-                                    <i class="fa fa-dashboard"></i> <span>Predict History</span>
-                                </a>
-                            </li>
-
-                            <!-- <li class="treeview">
-                                <a href="#">
-                                    <i class="fa fa-folder"></i> <span>Examples</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-angle-right"></i> Login</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i> Register</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i> 404 Error</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i> 500 Error</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i> Blank Page</a></li>
-                                </ul>
-                            </li> -->
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </nav>
-            </aside>
-        </div>
-        <!--left-fixed -navigation-->
-
-        <!-- header-starts -->
-        <div class="sticky-header header-section ">
-            <div class="header-left">
-                <!--toggle button start-->
-                <button id="showLeftPush"><i class="fa fa-bars"></i></button>
-                <!--toggle button end-->
-
-                <!--notification menu end -->
-                <div class="clearfix"> </div>
-            </div>
-            <div class="header-right">
-
-
-                <div class="profile_details">
-                    <ul>
-                        <li class="dropdown profile_details_drop">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <div class="profile_img">
-                                    <span class="prfil-img"><img src={{ url_for('static',
-                                            filename="assets-user/images/user.png" )}} alt=""
-                                            style="width: 40px;height: 40px;"> </span>
-                                    <div class="user-name">
-                                        <p>{{ name }}</p>
-                                        <span>User</span>
-                                    </div>
-                                    <i class="fa fa-angle-down lnr"></i>
-                                    <i class="fa fa-angle-up lnr"></i>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu drp-mnu">
-                                <li> <a href="{{ url_for('profile') }}"><i class="fa fa-suitcase"></i> Profile</a> </li>
-                                <li> <a href="#"><i class="fa fa-cog"></i> Change Password</a> </li>
-                                <li> <a href={{ url_for("logout") }}><i class="fa fa-sign-out"></i> Logout</a> </li>
-                            </ul>
-                        </li>
+    <!-- Sidebar -->
+    <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1" style="min-height: 100vh;">
+        <aside class="sidebar-left">
+            <nav class="navbar navbar-inverse" style="background: linear-gradient(180deg, #283E51, #485563); border: none; height: 100vh;">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target=".collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h1 style="margin-top: 10px;">
+                        <a class="navbar-brand" href="{{ url_for('user_index') }}" style="color: #fff;">
+                            <i class="fa fa-leaf" style="margin-right: 10px;"></i>
+                            <span style="font-size: 22px;">Sapienta</span>
+                            <span class="dashboard_text" style="font-size: 12px; color: #ddd;">User dashboard</span>
+                        </a>
+                    </h1>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="sidebar-menu" style="padding-top: 15px;">
+                        <li class="treeview"><a href="{{ url_for('user_index') }}"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+                        <li class="treeview"><a href="{{ url_for('profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+                        <li class="treeview"><a href="{{ url_for('predict') }}"><i class="fa fa-lightbulb-o"></i> <span>Predict</span></a></li>
+                        <li class="treeview"><a href="{{ url_for('chatbot') }}"><i class="fa fa-commenting-o"></i> <span>ChatBot</span></a></li>
+                        <li class="treeview"><a href="{{ url_for('history') }}"><i class="fa fa-history"></i> <span>Predict History</span></a></li>
                     </ul>
                 </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="clearfix"> </div>
+            </nav>
+        </aside>
+    </div>
+
+    <!-- Header -->
+    <div class="sticky-header header-section" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); box-shadow: 0 4px 10px rgba(0,0,0,0.05); padding: 10px 20px; display: flex; align-items: center; justify-content: space-between;">
+        <div class="header-left">
+            <button id="showLeftPush" style="border: none; background: transparent; font-size: 22px; color: #333;">
+                <i class="fa fa-bars"></i>
+            </button>
         </div>
+
+        <div class="header-right" style="margin-left: auto;">
+            <div class="profile_details" style="position: relative;">
+                <ul style="margin: 0; padding: 0; list-style: none;">
+                    <li class="dropdown profile_details_drop" style="cursor: pointer;">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
+                            style="display: flex; align-items: center; padding: 8px 15px; border-radius: 30px; background: #f0f2f5; transition: 0.3s;">
+                            <img src="{{ url_for('static', filename='assets-user/images/user.png') }}"
+                                alt="User" style="width: 45px; height: 45px; border-radius: 50%; box-shadow: 0 0 6px rgba(0,0,0,0.1);">
+                            <div style="margin-left: 12px; text-align: left;">
+                                <p style="margin: 0; font-weight: 600; color: #333;">{{ name }}</p>
+                                <span style="font-size: 12px; color: #888;">User</span>
+                            </div>
+                            <i class="fa fa-angle-down" style="margin-left: 12px; color: #333;"></i>
+                        </a>
+                        <ul class="dropdown-menu drp-mnu" style="right: 0; left: auto; margin-top: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-radius: 10px;">
+                            <li><a href="{{ url_for('profile') }}"><i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i> Change Password</a></li>
+                            <li><a href="{{ url_for('logout') }}"><i class="fa fa-sign-out"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
         <!-- //header-ends -->

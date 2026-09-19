@@ -1,26 +1,433 @@
 {% include "user/header.html" %}
 
 <!-- main content start-->
-<div id="page-wrapper" style="min-height: 292px;">
-    <div class="main-page">
-        <h2 class="title1">Welcome</h2>
-        <div class="blank-page widget-shadow scroll" id="style-2 div1">
-            <p>Welcome to the Career Assistance ! <br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Assistance Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .floating-shapes {
+            display: none;
+        }
+        
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+        
+        #page-wrapper {
+            position: relative;
+            z-index: 1;
+            min-height: auto;
+            padding: 0;
+        }
+        
+        .main-page {
+            max-width: 100%;
+            margin: 0;
+        }
+        
+        .title1 {
+            display: none;
+        }
+        
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+            to { filter: drop-shadow(0 0 25px rgba(255,255,255,0.6)); }
+        }
+        
+        .content-container {
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+            margin: 0;
+        }
+        
+        .content-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 4s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            from { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            to { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .user-greeting {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .intro-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #2d3748;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8edea, #fed6e3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .feature-card:hover::before {
+            left: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .feature-card:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .feature-card:nth-child(3) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.3), transparent);
+            transition: left 0.3s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+            animation: countUp 2s ease-out;
+        }
+        
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #718096;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .content-container {
+                padding: 1.5rem;
+                margin: 0;
+            }
+            
+            .intro-text {
+                font-size: 1.1rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-greeting {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
 
-                Our goal is to help you navigate your career path effectively. Whether you're just starting out or
-                looking to make a change, we're here to provide guidance and support.
-
-                In today's fast-paced world, finding the right career can be challenging. That's why we're here to offer
-                personalized advice tailored to your unique skills, interests, and goals.
-
-                With our expertise, you'll gain insights into various industries, explore potential career options, and
-                develop a strategic plan to achieve your professional aspirations.
-
-                Together, let's embark on this journey towards a fulfilling and successful career!
-
-            </p>
+    <div id="page-wrapper">
+        <div class="main-page">
+            <div class="content-container">
+                <br><br>
+                <div class="welcome-content">
+                    <p class="user-greeting">Welcome, {{ name }}!</p>
+                    <p class="intro-text">
+                        Welcome to the <span class="highlight">Career Assistance Hub</span>! 
+                        <br><br>
+                        Our goal is to help you navigate your career path effectively. Whether you're just starting out or looking to make a transformative change, we're here to provide expert guidance and unwavering support.
+                        <br><br>
+                        In today's fast-paced world, finding the right career can be challenging. That's why we're here to offer <span class="highlight">personalized advice</span> tailored to your unique skills, interests, and ambitious goals.
+                    </p>
+                    
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <span class="stat-number">10K+</span>
+                            <div class="stat-label">Careers Guided</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <div class="stat-label">Industries Covered</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">95%</span>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <span class="feature-icon">🎯</span>
+                            <div class="feature-title">Strategic Planning</div>
+                            <div class="feature-desc">Develop a comprehensive roadmap tailored to your professional aspirations and market opportunities.</div>
+                        </div>
+                        <div class="feature-card">
+                            <span class="feature-icon">🚀</span>
+                            <div class="feature-title">Industry Insights</div>
+                            <div class="feature-desc">Gain deep understanding of various industries and emerging career trends to stay ahead.</div>
+                        </div>
+                        <div class="feature-card">
+                            <span class="feature-icon">💡</span>
+                            <div class="feature-title">Skill Development</div>
+                            <div class="feature-desc">Identify key competencies and create personalized learning paths for continuous growth.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-section">
+    <a href="{{ url_for('predict') }}" class="cta-button">
+        <i class="fa fa-lightbulb-o" style="margin-right: 8px;"></i>
+        Begin Your Journey
+    </a>
+</div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+    <script>
+        // Animate stats on scroll
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach((stat, index) => {
+                const finalValue = stat.textContent;
+                const isPercentage = finalValue.includes('%');
+                const numValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+                
+                let currentValue = 0;
+                const increment = numValue / 50;
+                
+                const timer = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= numValue) {
+                        currentValue = numValue;
+                        clearInterval(timer);
+                    }
+                    
+                    if (isPercentage) {
+                        stat.textContent = Math.floor(currentValue) + '%';
+                    } else if (numValue >= 1000) {
+                        stat.textContent = Math.floor(currentValue / 1000) + 'K+';
+                    } else {
+                        stat.textContent = Math.floor(currentValue) + '+';
+                    }
+                }, 40);
+            });
+        }
+        
+        // Trigger animations when page loads
+        window.addEventListener('load', () => {
+            setTimeout(animateStats, 500);
+        });
+        
+        // Add particle effect on button hover
+        document.querySelector('.cta-button').addEventListener('mouseenter', function(e) {
+            this.style.transform = 'translateY(-3px) scale(1.05)';
+        });
+        
+        document.querySelector('.cta-button').addEventListener('mouseleave', function(e) {
+            this.style.transform = 'translateY(-3px) scale(1)';
+        });
+    </script>
+</body>
+</html>
 
 {% include "user/footer.html" %}
